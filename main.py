@@ -5,7 +5,7 @@
 import Validation
 
 def main():
-  results = Validation.validate()
+  results = Validation.validate(verbose=True)
   Validation.draw_tests(results)
 
 if __name__ == '__main__':

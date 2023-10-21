@@ -7,16 +7,16 @@ def get_package():
 
 # Вызов bf интерпретатора
 #   - возвращает: успешное/неуспешное завершение, stdout
-def get_output(test_file, test_input, flags):
+def get_output(test_file, test_input='', as_bytes=False):
   cwd = os.path.dirname(os.path.realpath(__file__))
   try:
-    test_output = subproc.run(['bf', flags, test_file], 
+    test_output = subproc.run(['bf', test_file], 
                                 cwd=cwd,
                                 timeout=5,
                                 capture_output=True, 
                                 input=test_input, 
                                 check=True,
-                                text=True)
+                                text=(not as_bytes))
     test_output.check_returncode()
   except subproc.CalledProcessError:
     return False, ''
